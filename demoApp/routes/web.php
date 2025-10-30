@@ -15,3 +15,5 @@ Route::get('/download', [FileController::class, 'download']);
 route::get('/download/invoice/{InvoiceId}', [FileController::class, 'downloadInvoice']);
 
 route::get('/download/invoice', [FileController::class, 'error']);
+
+route::get('/download/invoice/{InvoiceId}/type/{filetype}', [FileController::class, 'downloadInvoiceWithType']);

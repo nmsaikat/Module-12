@@ -11,7 +11,11 @@ class FileController extends Controller
     }
 
     function downloadInvoice($InvoiceId) {
-        return response("Downloading invoice with ID: {$InvoiceId}");
+        return response("Downloading PDF invoice with ID: {$InvoiceId}");
+    }
+
+    function downloadInvoiceWithType($InvoiceId, $filetype) {
+        return response("Downloading {$filetype} invoice with ID: {$InvoiceId}");
     }
 
     function error() {
