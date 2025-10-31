@@ -1,0 +1,19 @@
+# New Project Create
+# Create A New Controller : php artisan make:controller DemoController
+
+# Laravel Response
+01 -> Response Type String
+02 -> Response Type int
+03 -> Response Type Null
+04 -> Response Type Boolean
+05 -> Response Type Array
+06 -> Response Type Associative Array
+07 -> Response Type JSON
+08 -> Response Type Code Status Menupulation
+09 -> Response Type Redirect
+10 -> Response Type Binary File
+11 -> Response Type Download File
+12 -> Response Type Blade View
+
+# Laravel Request
+01 -> Method GET, POST, PUT, PATCH, DELETE
