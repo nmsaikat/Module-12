@@ -16,4 +16,10 @@
 12 -> Response Type Blade View
 
 # Laravel Request
+00 -> For Prctice Off The CSRF Property
 01 -> Method GET, POST, PUT, PATCH, DELETE
+02 -> Request Query String
+03 -> Request JSON Body
+04 -> Request Header
+05 -> Request Form- Data
+06 -> Request IP Address Catch

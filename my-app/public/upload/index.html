@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum RevOps Intelligence Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Mobile menu toggle button */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .stats-section {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+        }
+        
+        .stats-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .problem-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .problem-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        
+        .problem-section p {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .problem-card {
+            padding: 2rem;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .problem-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .solution-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 2rem;
+        }
+        
+        .solution-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .solution-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-box {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .tiers-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .tiers-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        
+        .tier-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 6px solid #667eea;
+        }
+        
+        .tier-card h3 {
+            font-size: 1.8rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .tier-card p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tier-functions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .function-tag {
+            background: #f8f9fa;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #333;
+            border-left: 3px solid #667eea;
+        }
+        
+        .cta-section {
+            background: #f8f9fa;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            /* Show hamburger menu on mobile */
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            /* Hide menu by default on mobile */
+            nav ul {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+                gap: 0;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Quantum</div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solution.html">Solution</a></li>
+                <li><a href="industries.html">Industries</a></li>
+                <li><a href="core-functions.html">Core Functions</a></li>
+                <li><a href="supporting-functions.html">Supporting Operations</a></li>
+                <li><a href="https://vibrantai.com/quantumdemo">See Demo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>The Complete Revenue Operations Intelligence Platform</h1>
+        <p>Unify all 11 revenue-generating and supporting functions with AI-powered intelligence. No-code. No-ETL. Immediate insights across your entire revenue operation.</p>
+        <a href="solution.html" class="cta-button">Explore the Platform</a>
+        <a href="#contact" class="cta-button secondary">Request Demo</a>
+    </section>
+    
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-number">37-57%</div>
+                <div class="stat-label">Revenue Improvement in 12 Months</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">4-6</div>
+                <div class="stat-label">Months to Full ROI Payback</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Functions Unified</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">70-80%</div>
+                <div class="stat-label">Reduction in Manual Data Work</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="problem-section">
+        <h2>The Revenue Operations Paradox</h2>
+        <p>Every function has sophisticated tools, yet organizations lose 25-50% of revenue potential to preventable leakage, misalignment, and missed opportunities.</p>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>Marketing</h3>
+                <p>Can track MQLs but can't see how campaigns influence deal velocity, expansion revenue, or customer lifetime value. 73% of MQLs rejected by sales.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Sales</h3>
+                <p>Only 9% of companies forecast within 5% accuracy. 80 of 100 opportunities don't close on forecast date. Conversation insights trapped in silos.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Customer Success</h3>
+                <p>Reactive health scoring alerts trigger after problems exist. Can't predict churn 6+ months out or identify expansion opportunities systematically.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Pricing & Deal Desk</h3>
+                <p>3-8% revenue leakage from unnecessary discounting. Approval delays average 5-7 days. Decisions made without customer lifetime value context.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Implementation</h3>
+                <p>20-35% of projects exceed planned hours. 25-30% of customers with difficult implementations churn within 18 months. Services margins erode.</p>
+            </div>
+            <div class="problem-card">
+                <h3>Product/Engineering</h3>
+                <p>40-50% of engineering capacity spent on features that drive less than 10% of revenue. Can't prove product team's contribution to business outcomes.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="solution-section">
+        <div class="solution-content">
+            <h2>The Quantum Difference</h2>
+            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 3rem;">A no-code, no-ETL, AI-powered intelligence platform that seamlessly integrates structured data from operational systems with unstructured data from documents, contracts, emails, and research—delivering insights that drive action across all revenue-generating and supporting functions.</p>
+            
+            <div class="solution-features">
+                <div class="feature-box">
+                    <h3>🚀 No Disruption</h3>
+                    <p>Keep all existing tools your teams love. Quantum adds an intelligence layer on top without forcing platform migration.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>⚡ No Data Engineering</h3>
+                    <p>Seamless integration across all systems without ETL pipelines, data warehouses, or technical complexity.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>💬 Natural Language</h3>
+                    <p>Business users across all functions ask questions in plain English and receive actionable answers instantly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🤖 AI-Powered Intelligence</h3>
+                    <p>AI explains "why" behind every metric and recommends "what to do" with coordinated cross-functional actions.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>📊 All Data Types</h3>
+                    <p>Structured transactional data combines with unstructured documents, contracts, emails, and research for complete context.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>🎯 Phased Implementation</h3>
+                    <p>Start with core revenue functions, expand to supporting operations at your pace. Value in weeks, not years.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="tiers-section">
+        <h2>Three Tiers of Revenue Intelligence</h2>
+        
+        <div class="tier-card">
+            <h3>Tier 1: Core Revenue Functions</h3>
+            <p><strong>Immediate Impact</strong> - These functions directly touch customers and drive revenue</p>
+            <div style="background: #e6f3ff; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <strong style="color: #667eea;">Value Delivered:</strong> 13-26% revenue improvement through better forecasting, lead quality, expansion capture, and strategic decision-making
+            </div>
+            <div class="tier-functions">
+                <div class="function-tag">Marketing Operations</div>
+                <div class="function-tag">Sales Operations</div>
+                <div class="function-tag">Customer Success Operations</div>
+                <div class="function-tag">Finance & Revenue Recognition</div>
+                <div class="function-tag">Revenue Operations Leadership</div>
+            </div>
+        </div>
+        
+        <div class="tier-card">
+            <h3>Tier 2: Revenue-Critical Supporting Operations</h3>
+            <p><strong>Multiplier Effect</strong> - These functions enable or constrain revenue generation</p>
+            <div style="background: #e6f3ff; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <strong style="color: #667eea;">Value Delivered:</strong> Additional 18-26% revenue improvement through optimal pricing, smooth implementations, and products that drive customer success
+            </div>
+            <div class="tier-functions">
+                <div class="function-tag">Pricing & Deal Desk Operations</div>
+                <div class="function-tag">Implementation & Professional Services</div>
+                <div class="function-tag">Product/Engineering Operations</div>
+            </div>
+        </div>
+        
+        <div class="tier-card">
+            <h3>Tier 3: Operational Excellence Functions</h3>
+            <p><strong>Foundation & Efficiency</strong> - These functions impact customer experience and operational efficiency</p>
+            <div style="background: #e6f3ff; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <strong style="color: #667eea;">Value Delivered:</strong> Additional 6-15% revenue improvement through exceptional customer experience, operational efficiency, and working capital optimization
+            </div>
+            <div class="tier-functions">
+                <div class="function-tag">Support Operations</div>
+                <div class="function-tag">Supply Chain & Fulfillment Operations</div>
+                <div class="function-tag">Order Processing & Billing Operations</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section" id="contact">
+        <h2>Transform Your Revenue Operations</h2>
+        <p>See how Quantum can deliver 37-57% revenue improvement with 4-6 month payback for your organization.</p>
+        <a href="solution.html" class="cta-button">Learn More About Quantum</a>
+        <a href="https://vibrantai.com/quantumdemo/" class="cta-button secondary">Schedule a Demo</a>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Quantum RevOps Intelligence Platform. All rights reserved.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">Where functional excellence meets cross-functional intelligence</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnToggle = mobileMenuToggle.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

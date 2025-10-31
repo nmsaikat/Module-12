@@ -10,8 +10,9 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+    // For Prctice Off The CSRF Property
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->validateCsrfTokens(except:['*']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

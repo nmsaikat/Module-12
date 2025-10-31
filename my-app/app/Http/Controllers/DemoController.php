@@ -46,4 +46,34 @@ class DemoController extends Controller
     function demo2(){
         return "Hello";
     }
+
+    // Laravel Request JSON Body Function
+    function demo3(Request $request){
+        $JsonBody = $request->input();
+        return $JsonBody;
+    }
+
+    // Request Header Function
+    function demo4(Request $request){
+        $Head=$request->header();
+        return $Head;
+    }
+
+    // Request Form Data Function
+    function demo5(Request $request) {
+        $FormData = $request->input();
+        return $FormData;
+    }
+
+    // Request Form Data For File Upload Function
+    function demo6(Request $request) {
+        $myFile = $request->file('myindex');
+        $myFile->move(public_path('upload'), $myFile->getClientOriginalName());
+        return "File Uploaded Successfully";
+    }
+
+    // Request IP Address Function
+    function demo7(Request $request) {
+        return $request->ip();
+    }
 }
