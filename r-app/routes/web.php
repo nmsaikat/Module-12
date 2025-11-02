@@ -8,4 +8,5 @@ Route::get('/', function () {
 });
 
 
-Route::post('/demo', [DemoController::class, 'DemoAction']);
+Route::get('/demo1', [DemoController::class, 'DemoAction1']);
+Route::get('/demo2', [DemoController::class, 'DemoAction2']);
