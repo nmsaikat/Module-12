@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class DemoController extends Controller
 {
-    function DemoAction() {
-        return "Hello from Web Route";
+    function DemoAction(Request $request) {
+        if($request->accepts(['text/html'])) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }
