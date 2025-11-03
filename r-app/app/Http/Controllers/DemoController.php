@@ -19,15 +19,21 @@ class DemoController extends Controller
     // }
 
     // Cookie Response
-    function Demo(){
-        $name="token";
-        $value="12345cf";
-        $minutes=60;
-        $path="/";
-        $domain=$_SERVER['SERVER_NAME'];
-        $secure=false;
-        $httpOnly=true;
+    // function Demo(){
+    //     $name="token";
+    //     $value="12345cf";
+    //     $minutes=60;
+    //     $path="/";
+    //     $domain=$_SERVER['SERVER_NAME'];
+    //     $secure=false;
+    //     $httpOnly=true;
 
-        return response("Hello")->cookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
+    //     return response("Hello")->cookie($name, $value, $minutes, $path, $domain, $secure, $httpOnly);
+    // }
+
+
+    // Response Header
+    function demo(){
+        return response('Hello')->header('key1', 'value1');
     }
 }
