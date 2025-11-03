@@ -8,5 +8,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/demo1', [DemoController::class, 'FileBinary']);
-Route::get('/demo2', [DemoController::class, 'FileDownload']);
+// Route::get('/demo1', [DemoController::class, 'FileBinary']);
+// Route::get('/demo2', [DemoController::class, 'FileDownload']);
+
+Route::get('/demo', [DemoController::class, 'demo']);
