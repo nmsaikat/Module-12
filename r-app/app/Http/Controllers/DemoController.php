@@ -33,7 +33,13 @@ class DemoController extends Controller
 
 
     // Response Header
-    function demo(){
-        return response('Hello')->header('key1', 'value1');
+    // function demo(){
+    //     return response('Hello')->header('key1', 'value1');
+    // }
+
+
+    // Response View
+    function demo() {
+        return response()->view('page.home');
     }
 }
